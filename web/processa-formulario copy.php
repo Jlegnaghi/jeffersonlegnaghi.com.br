@@ -25,7 +25,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $nome = $_POST['nome'];
     $email = $_POST['email'];
     $mensagem = $_POST['mensagem'];
-    $foto= $_POST['imagem'];
 
     // Valida os dados do formulário
     $errors = [];
@@ -50,7 +49,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         echo "</ul>";
     } else {
         // Insere os dados do formulário no banco de dados
-        $sql = "INSERT INTO contato (nome, email, mensagem, foto) VALUES ('$nome', '$email', '$mensagem', '$foto')";
+        $sql = "INSERT INTO contato (nome, email, mensagem) VALUES ('$nome', '$email', '$mensagem')";
 
         if ($conn->query($sql) === TRUE) {
             echo "Obrigado por entrar em contato!";
@@ -59,24 +58,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     }
 
-    mail (
-        "jeffersonlegnaghi07@gmail.com", //Endereço que vai receber a mensagem
-        "Nome: $nome
-        Email: $email
-        Mensagem: $mensagem", "Ola Jefferson, você tem uma nova menssagem de:$nome<$email> \r\n  Mensagem: $mensagem");
-
-    /*$to = "$email";
-    $subject = $mensagem;
-    $txt = "$mensagem";
-    $headers = "From: jeffersonlegnaghi07@gmail.com" . "\r\n";
-    
-    mail($to,$subject,$txt,$headers);*/
-
-
     // Fecha a conexão com o banco de dados
     $conn->close();
 }
-
-    header("Location: index.html"); 
-
 ?>
